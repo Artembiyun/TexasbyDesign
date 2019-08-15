@@ -386,7 +386,7 @@ class Form extends Component {
             </li>
           </ol>
           <ReCaptcha />
-          <input className={styles.submit} id="submitButton" type="submit" />
+          <input className={styles.submit} id="submitButton" type="submit" value="Submit" />
         </form>
       </div>
     );
