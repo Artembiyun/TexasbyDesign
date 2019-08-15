@@ -362,7 +362,7 @@ class Form extends Component {
               <div className={styles.checkboxList__text}>
                 I have read and agreed to the contest{" "}
                 <a
-                  href="#"
+                  href="/#"
                   className={styles.privacyPolicy}
                   onClick={this.onOpenModal}
                 >
