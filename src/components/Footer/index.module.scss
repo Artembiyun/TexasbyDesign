@@ -1,0 +1,38 @@
+#footer {
+  width: 100%;
+  min-height: 300px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 60px;
+  padding-bottom: 100px;
+}
+
+.logoContainer {
+  width: 1100px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  &__logo {
+    padding: 1em;
+
+    &:hover {
+      transition: 0.2s;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.rulesContainer {
+  width: 800px;
+  max-width: 100%;
+}
+
+.rulesText {
+  font-size: 8pt;
+  margin-left: 20px;
+}

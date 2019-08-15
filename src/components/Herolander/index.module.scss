@@ -1,0 +1,27 @@
+.lander {
+  margin: 0px;
+  padding: 0px;
+  max-width: 100%;
+  min-height: 1000px;
+  background-image: url("../../Assets/images/Group-115.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  display: inline-block;
+  width: 100%;
+  max-width: 578px;
+  height: 514px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__Image {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,35 @@
+#contestBox {
+  min-height: 1000px;
+  background-image: url("../../Assets/images/Mask\ Group\ 35.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover 1%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grandPrize {
+  font-weight: normal;
+}
+
+.grandPrizeList {
+  padding-left: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  margin-top: 21vh;
+  max-width: 900px;
+  min-height: 600px;
+  background-color: #ffffff;
+  padding: 20px;
+
+  &__details {
+    margin: 40px;
+    width: 85%;
+  }
+}
