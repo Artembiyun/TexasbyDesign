@@ -487,7 +487,7 @@ class Form extends Component {
               <input className={styles.submit} type="submit" value="Submit" />
             </form>
           </div>
-        )}
+         )}
       </div>
     );
   }
