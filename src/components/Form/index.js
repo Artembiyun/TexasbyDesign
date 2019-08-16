@@ -403,6 +403,7 @@ class Form extends Component {
                       name="TTinfo"
                       checked={this.state.TTinfo}
                       onChange={this.handleCheckboxChange}
+                      aria-describedby="Travel Texas Newsletter checkbox"
                     />
                     <div className="control_indicator" />
                   </label>
@@ -427,6 +428,7 @@ class Form extends Component {
                       name="CitylineOffers"
                       checked={this.state.CitylineOffers}
                       onChange={this.handleCheckboxChange}
+                      aria-describedby="Cityline Newsletter checkbox"
                     />
                     <div className="control_indicator" />
                   </label>
