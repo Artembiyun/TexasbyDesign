@@ -11,9 +11,9 @@ class WinATrip extends Component {
         <div className={styles.banner}>
           <h5>YOU COULD</h5>
           <div className={styles.banner__winATrip}>
-            <h2 style={styles.dispInline}>WIN</h2>
-            <p style={styles.asteriskstyle}>*</p>
-            <h2 style={styles.dispInline}> A TRIP</h2>
+            <h2 className={styles.dispInline}>WIN</h2>
+            <p className={styles.asteriskstyle}>*</p>
+            <h2 className={styles.dispInline}> A TRIP</h2>
           </div>
           <h3 style={{ textAlign: "center" }}>
             to experience the arts, culture, and diversity of Texas!

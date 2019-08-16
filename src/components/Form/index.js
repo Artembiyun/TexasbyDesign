@@ -58,6 +58,11 @@ class Form extends Component {
     console.log(this.state);
   }
 
+  callbacktest = (data) => {
+    console.log('look we got it ma!' + data);
+    this.setState({captcha:data})
+  }
+
   submit(e) {
     e.preventDefault();
     console.log(
@@ -435,7 +440,7 @@ class Form extends Component {
               </div>
             </li>
           </ol>
-          <ReCaptcha />
+          <ReCaptcha callbacktest={this.reCaptchaConfirm} />
           <input
             className={styles.submit}
             id="submitButton"

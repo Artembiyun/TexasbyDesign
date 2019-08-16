@@ -17,8 +17,8 @@ class reCaptcha extends Component {
     }
   }
   verifyCallback(recaptchaToken) {
-    console.log(recaptchaToken, " recaptcha token");
-    return recaptchaToken
+    this.props.callbacktest(recaptchaToken);
+    return recaptchaToken;
   }
   render() {
     return (
