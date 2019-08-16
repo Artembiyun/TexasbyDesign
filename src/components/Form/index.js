@@ -66,13 +66,16 @@ class Form extends Component {
     e.preventDefault();
     if (this.state.captcha){
     const formSubmitted = true;
-    //Server Post Request goes here
+    //Server Post Request would go here
     this.setState({
+        captchaErr: false, 
         formSubmitted
       });
     }
     else{
-      alert('Please confirm you are not a robot')
+      this.setState({
+        captchaErr: true
+      }); 
     }
   }
 
@@ -435,14 +438,17 @@ class Form extends Component {
                     nostrud vim in.
                   </p>
                 </Modal>
-                <div className={styles.popup} id="popup" />
               </div>
             </li>
           </ol>
           <ReCaptcha callbacktest={this.captchaCallback} />
+          {this.state.captchaErr ? (<div className={styles.feedbackBox}>
+                <span
+                  className={styles.feedbackBox__span}
+                >Please confirm you are not a robot!</span>
+              </div>) : null}
           <input
             className={styles.submit}
-            id="submitButton"
             type="submit"
             value="Submit"
           />
