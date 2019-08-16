@@ -7,6 +7,21 @@ class Form extends Component {
   constructor() {
     super();
     this.submit = this.submit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    this.state = {
+        firstName: "",
+        lastName: "",
+        address1: "",
+        address2: "",
+        city: "",
+        province: "",
+        postalCode: "",
+        phoneNumber: "",
+        email: "",
+        TTinfo: false,
+        CitylineOffers: false
+    };
   }
 
   state = {
@@ -21,128 +36,131 @@ class Form extends Component {
     this.setState({ open: false });
   };
 
-  submit(e) {
-    e.preventDefault();
-    let user = this.validateForm();
-    if (user !== false) {
-      //this is where the post request would go
-      this.submitSuccess();
-      console.log(
-        "Thank you " +
-          user.firstName +
-          " for entering the Texas by Design Contest!"
-      );
-    }
+  handleInputChange(e) {
+    const target = e.target;
+    const value = target.type === "select" ? target.checked : target.value;
+    const name = target.name;
+    
+    this.setState({
+      [name]: value
+    });
+    this.validateForm();
   }
 
-  submitSuccess() {
-    document.getElementById("submitButton").style.pointerEvents = "none";
-    document.getElementById("submitButton").style.backgroundColor = "orange";
-    document.getElementById("submitButton").value = "Thank you";
+  handleCheckboxChange(e) {
+    const target = e.target;
+    const value = target.checked;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+    console.log(this.state);
+  }
+
+  submit(e) {
+    e.preventDefault();
+    console.log(
+      "Thank you " +
+        this.state.firstName +
+        " for entering the Texas by Design Contest!"
+    );
+    const formSubmitted = true;
+    
+    this.setState({
+        formSubmitted
+      });
   }
 
   validateForm() {
-    //regular expressions for validation
-    let alphabeticRegEx = /^[a-zA-Z() ]+$/;
-    let postalCodeRegEx = /^([A-Za-z]\d[A-Za-z][-]?\d[A-Za-z]\d)/;
-    let phoneNumberRegEx = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
-    let emailRegEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-
-    let firstName = document.getElementById("firstName").value;
-    let lastName = document.getElementById("lastName").value;
-    let address1 = document.getElementById("address1").value;
-    let address2 = document.getElementById("address2").value;
-    let city = document.getElementById("city").value;
-    let province = document.getElementById("province").value;
-    let postalCode = document.getElementById("postalCode").value;
-    let phoneNumber = document.getElementById("phoneNumber").value;
-    let email = document.getElementById("email").value;
-    let TTinfo = document.getElementById("TTinfo").checked;
-    let CitylineOffers = document.getElementById("CitylineOffers").checked;
-
-    let validated = true;
-
-    //validates form inputs with .match(regex)
-    //if form input invalid, validated becomes false and form does not submit
-    if (!firstName.match(alphabeticRegEx)) {
-      document.getElementById("firstName_feedbackBox").style.display = "block";
-      document.getElementById("firstName_feedback").innerHTML =
-        "This field contains invalid characters. Please make sure to use only alphabetic characters, spaces, hyphens and periods";
-      validated = false;
-    } else {
-      document.getElementById("firstName_feedbackBox").style.display = "none";
-      document.getElementById("firstName_feedback").innerHTML = "";
+    const alphabeticRegEx = /^[a-zA-Z() ]+$/;
+    const postalCodeRegEx = /^([A-Za-z]\d[A-Za-z][-]?\d[A-Za-z]\d)/;
+    const phoneNumberRegEx = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
+    const emailRegEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+     if(this.state.firstName){
+       if(!this.state.firstName.match(alphabeticRegEx)){
+         this.setState({
+          nameErr: true
+         });
+       }
+       else{
+         this.setState({
+          nameErr: false
+         });
+       }
+     }
+     if(this.state.lastName){
+      if(!this.state.lastName.match(alphabeticRegEx)){
+        this.setState({
+         lNameErr: true
+        });
+      }
+      else{
+        this.setState({
+         lNameErr: false
+        });
+      }
     }
-    if (!lastName.match(alphabeticRegEx)) {
-      document.getElementById("lastName_feedbackBox").style.display = "block";
-      document.getElementById("lastName_feedback").innerHTML =
-        "This field contains invalid characters. Please make sure to use only alphabetic characters, spaces, hyphens and periods";
-      validated = false;
-    } else {
-      document.getElementById("lastName_feedbackBox").style.display = "none";
-      document.getElementById("lastName_feedback").innerHTML = "";
+    if(this.state.city){
+      if(!this.state.city.match(alphabeticRegEx)){
+        this.setState({
+         cityErr: true
+        });
+      }
+      else{
+        this.setState({
+         cityErr: false
+        });
+      }
     }
-    if (!city.match(alphabeticRegEx)) {
-      document.getElementById("city_feedbackBox").style.display = "block";
-      document.getElementById("city_feedback").innerHTML =
-        "This field contains invalid characters. Please make sure to use only alphabetic characters";
-      validated = false;
-    } else {
-      document.getElementById("city_feedbackBox").style.display = "none";
-      document.getElementById("city_feedback").innerHTML = "";
+    if(this.state.postalCode){
+      if(!this.state.postalCode.match(postalCodeRegEx)){
+        this.setState({
+         pCodeErr: true
+        });
+      }
+      else{
+        this.setState({
+         pCodeErr: false
+        });
+      }
     }
-    if (!postalCode.match(postalCodeRegEx)) {
-      document.getElementById("postalCode_feedbackBox").style.display = "block";
-      document.getElementById("postalCode_feedback").innerHTML =
-        "This field is in the wrong format. Use the format H0H0H0 instead";
-      validated = false;
-    } else {
-      document.getElementById("postalCode_feedbackBox").style.display = "none";
-      document.getElementById("postalCode_feedback").innerHTML = "";
+    if(this.state.phoneNumber){
+      if(!this.state.phoneNumber.match(phoneNumberRegEx)){
+        this.setState({
+         pNumberErr: true
+        });
+      }
+      else{
+        this.setState({
+         pNumberErr: false
+        });
+      }
     }
-    if (!phoneNumber.match(phoneNumberRegEx)) {
-      document.getElementById("phoneNumber_feedbackBox").style.display =
-        "block";
-      document.getElementById("phoneNumber_feedback").innerHTML =
-        "This field is in the wrong format. Use the format 111-111-1111 instead";
-      validated = false;
-    } else {
-      document.getElementById("phoneNumber_feedbackBox").style.display = "none";
-      document.getElementById("phoneNumber_feedback").innerHTML = "";
-    }
-    if (!email.match(emailRegEx)) {
-      document.getElementById("email_feedbackBox").style.display = "block";
-      document.getElementById("email_feedback").innerHTML =
-        "This field is in the wrong format. Use the format email@address.com instead";
-      validated = false;
-    } else {
-      document.getElementById("email_feedbackBox").style.display = "none";
-      document.getElementById("email_feedback").innerHTML = "";
-    }
-
-    if (validated === true) {
-      let formObject = {
-        firstName: firstName,
-        lastName: lastName,
-        address1: address1,
-        address2: address2,
-        city: city,
-        province: province,
-        postalCode: postalCode,
-        phoneNumber: phoneNumber,
-        email: email,
-        TTinfo: TTinfo,
-        CitylineOffers: CitylineOffers
-      };
-      return formObject;
-    } else {
-      return false;
+    if(this.state.email){
+      if(!this.state.email.match(emailRegEx)){
+        this.setState({
+         emailErr: true
+        });
+      }
+      else{
+        this.setState({
+         emailErr: false
+        });
+      }
     }
   }
 
   render() {
     const { open } = this.state;
     return (
+      <div>
+      { this.state.formSubmitted ? 
+      <div className={styles.completionBox}>
+        <h2>Thank You</h2>
+        <h3>We have recieved your contest entry</h3>
+      </div>
+    : (
       <div className={styles.formsContainer}>
         <div className={styles.formsContainer__prompt}>
           <h3 className={styles.submitText}>
@@ -160,47 +178,56 @@ class Form extends Component {
               <input
                 type="text"
                 name="firstName"
-                id="firstName"
+                onChange={this.handleInputChange}
+                value={this.state.firstName}
                 maxLength="150"
                 placeholder=""
                 required
-                aria-describedby="firstName_feedback"
+                aria-describedby="firstName"
+                pattern="^[a-zA-Z() ]+$"
               />
+              { this.state.nameErr ? (
               <div className={styles.feedbackBox} id="firstName_feedbackBox">
                 <span
                   className={styles.feedbackBox__span}
                   id="firstName_feedback"
-                />
-              </div>
+                >This field contains invalid characters. Please make sure to use only alphabetic characters, spaces, hyphens and periods</span>
+              </div>) : 
+              null  
+            }
             </li>
             <li className={styles.field}>
               <label>Last Name</label>
               <input
                 type="text"
                 name="lastName"
-                id="lastName"
+                onChange={this.handleInputChange}
+                value={this.state.lastName}
                 maxLength="150"
                 placeholder=""
                 required
-                aria-describedby="lastName_feedback"
+                aria-describedby="lastName"
+                pattern="^[a-zA-Z() ]+$"
               />
+              { this.state.lNameErr ? (
               <div className={styles.feedbackBox} id="lastName_feedbackBox">
                 <span
                   className={styles.feedbackBox__span}
                   id="lastName_feedback"
-                />
-              </div>
+                >This field contains invalid characters. Please make sure to use only alphabetic characters, spaces, hyphens and periods</span>
+              </div>) : null}
             </li>
             <li className={styles.field + " " + styles.long}>
               <label>Address Line 1</label>
               <input
                 type="text"
                 name="address1"
-                id="address1"
+                onChange={this.handleInputChange}
+                value={this.state.address1}
                 maxLength="50"
                 placeholder=""
                 required
-                aria-describedby="address1_feedback"
+                aria-describedby="address1"
               />
             </li>
             <li className={styles.field + " " + styles.long}>
@@ -210,10 +237,11 @@ class Form extends Component {
               <input
                 type="text"
                 name="address2"
-                id="address2"
+                onChange={this.handleInputChange}
+                value={this.state.address1}
                 maxLength="50"
                 placeholder=""
-                aria-describedby="address2_feedback"
+                aria-describedby="address2"
               />
             </li>
             <li className={styles.field + " " + styles.field__padded}>
@@ -221,24 +249,30 @@ class Form extends Component {
               <input
                 type="text"
                 name="city"
-                id="city"
+                onChange={this.handleInputChange}
+                value={this.state.city}
                 maxLength="25"
                 placeholder=""
                 required
-                aria-describedby="city_feedback"
+                aria-describedby="city"
+                pattern="^[a-zA-Z() ]+$"
               />
+              { this.state.cityErr ? (
               <div className={styles.feedbackBox} id="city_feedbackBox">
-                <span className={styles.feedbackBox__span} id="city_feedback" />
-              </div>
+                <span className={styles.feedbackBox__span} id="city_feedback" >This field contains invalid characters. Please make sure to use only alphabetic characters, spaces, hyphens and periods</span>
+              </div>) : null}
             </li>
             <li className={styles.field}>
               <label>Province</label>
               <select
                 name="province"
-                id="province"
+                type="select"
+                value={this.state.province}
+                onChange={this.handleInputChange}
                 required
-                aria-describedby="province_feedback"
+                aria-describedby="province"
               >
+                <option value="" />
                 <option value="Alberta">Alberta</option>
                 <option value="British Columbia">British Columbia</option>
                 <option value="Manitoba">Manitoba</option>
@@ -247,9 +281,7 @@ class Form extends Component {
                   Newfoundland and Labrador
                 </option>
                 <option value="Nova Scotia">Nova Scotia</option>
-                <option value="Ontario" selected>
-                  Ontario
-                </option>
+                <option value="Ontario">Ontario</option>
                 <option value="Prince Edward Island">
                   Prince Edward Island
                 </option>
@@ -263,17 +295,20 @@ class Form extends Component {
                 name="postalCode"
                 type="text"
                 maxLength="7"
-                id="postalCode"
+                onChange={this.handleInputChange}
+                value={this.state.postalCode}
                 placeholder=""
                 required
-                aria-describedby="postalCode_feedback"
+                aria-describedby="postalCode"
+                pattern="([A-Za-z]\d[A-Za-z][-]?\d[A-Za-z]\d)"
               />
+              { this.state.pCodeErr ? (
               <div className={styles.feedbackBox} id="postalCode_feedbackBox">
                 <span
                   className={styles.feedbackBox__span}
                   id="postalCode_feedback"
-                />
-              </div>
+                >This field is in the wrong format. Use the format H0H0H0 instead</span>
+              </div>) : null}
             </li>
             <br />
             <li className={styles.field + " " + styles.field__padded}>
@@ -281,44 +316,54 @@ class Form extends Component {
               <input
                 type="tel"
                 name="phoneNumber"
-                id="phoneNumber"
+                onChange={this.handleInputChange}
+                value={this.state.phoneNumber}
                 maxLength="14"
                 placeholder=""
                 required
                 pattern="(?:\(?)(\d{3})(?:\)?)(\s|\.|-)?(\d{3})(\s|\.|-)?(\d{4})"
-                aria-describedby="phone_feedback"
+                aria-describedby="phone"
               />
+              { this.state.pNumberErr ? 
               <div className={styles.feedbackBox} id="phoneNumber_feedbackBox">
                 <span
                   className={styles.feedbackBox__span}
                   id="phoneNumber_feedback"
-                />
-              </div>
+                >This field is in the wrong format. Use the format 111-111-1111 instead</span>
+              </div> : null}
             </li>
             <li className={styles.field + " " + styles.field__padded}>
               <label>Email Address</label>
               <input
                 name="email"
                 type="email"
-                id="email"
+                onChange={this.handleInputChange}
+                value={this.state.email}
                 maxLength="50"
                 placeholder=""
                 required
-                aria-describedby="email_feedback"
+                aria-describedby="email"
+                pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
               />
+              {this.state.emailErr ? (
               <div className={styles.feedbackBox} id="email_feedbackBox">
                 <span
                   className={styles.feedbackBox__span}
                   id="email_feedback"
-                />
-              </div>
+                >This field is in the wrong format. Use the format email@address.com instead</span>
+              </div>) : null}
             </li>
           </ol>
 
           <ol>
             <li className={styles.checkboxList}>
               <label className="control control-checkbox">
-                <input type="checkbox" id="TTinfo" />
+                <input
+                  type="checkbox"
+                  name="TTinfo"
+                  checked={this.state.TTinfo}
+                  onChange={this.handleCheckboxChange}
+                />
                 <div className="control_indicator" />
               </label>
               <div className={styles.checkboxList__text}>
@@ -337,7 +382,12 @@ class Form extends Component {
             </li>
             <li className={styles.checkboxList}>
               <label className="control control-checkbox">
-                <input type="checkbox" id="CitylineOffers" />
+                <input
+                  type="checkbox"
+                  name="CitylineOffers"
+                  checked={this.state.CitylineOffers}
+                  onChange={this.handleCheckboxChange}
+                />
                 <div className="control_indicator" />
               </label>
               <div className={styles.checkboxList__text}>
@@ -386,8 +436,14 @@ class Form extends Component {
             </li>
           </ol>
           <ReCaptcha />
-          <input className={styles.submit} id="submitButton" type="submit" value="Submit" />
-        </form>
+          <input
+            className={styles.submit}
+            id="submitButton"
+            type="submit"
+            value="Submit"
+          />
+        </form>}
+      </div>)}
       </div>
     );
   }

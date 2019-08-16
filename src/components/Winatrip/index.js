@@ -6,24 +6,14 @@ import wacoImg from "../../Assets/images/Mask Group 34.png";
 
 class WinATrip extends Component {
   render() {
-    const dispInline = {
-      display: "inline-block"
-    };
-
-    const asteriskstyle = {
-      display: "inline-block",
-      fontSize: "21pt",
-      lineHeight: "10px"
-    };
-
     return (
       <div id={styles.tripmodule}>
         <div className={styles.banner}>
           <h5>YOU COULD</h5>
           <div className={styles.banner__winATrip}>
-            <h2 style={dispInline}>WIN</h2>
-            <p style={asteriskstyle}>*</p>
-            <h2 style={dispInline}> A TRIP</h2>
+            <h2 style={styles.dispInline}>WIN</h2>
+            <p style={styles.asteriskstyle}>*</p>
+            <h2 style={styles.dispInline}> A TRIP</h2>
           </div>
           <h3 style={{ textAlign: "center" }}>
             to experience the arts, culture, and diversity of Texas!

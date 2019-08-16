@@ -7,25 +7,25 @@ class reCaptcha extends Component {
     this.verifyCallback = this.verifyCallback.bind(this);
   }
   componentDidMount() {
-    if (this.captchaDemo) {
-      this.captchaDemo.reset();
+    if (this.captcha) {
+      this.captcha.reset();
     }
   }
   onLoadRecaptcha() {
-    if (this.captchaDemo) {
-      this.captchaDemo.reset();
+    if (this.captcha) {
+      this.captcha.reset();
     }
   }
   verifyCallback(recaptchaToken) {
     console.log(recaptchaToken, " recaptcha token");
+    return recaptchaToken
   }
   render() {
     return (
       <div>
-        {/* You can replace captchaDemo with any ref word */}
         <ReCaptcha
           ref={el => {
-            this.captchaDemo = el;
+            this.captcha = el;
           }}
           size="normal"
           data-theme="dark"
