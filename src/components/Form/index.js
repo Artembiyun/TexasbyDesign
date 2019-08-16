@@ -64,7 +64,7 @@ class Form extends Component {
 
   submit(e) {
     e.preventDefault();
-    if (captcha){
+    if (this.state.captcha){
     const formSubmitted = true;
     //Server Post Request goes here
     this.setState({
