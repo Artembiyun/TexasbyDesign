@@ -477,7 +477,7 @@ class Form extends Component {
               <div>
                 <ReCaptcha callbacktest={this.captchaCallback} />
                 {this.state.captchaErr ? (
-                  <div className={styles.feedbackBox}>
+                  <div className={styles.feedbackBox} style={{maxWidth:'280px'}}>
                     <span className={styles.feedbackBox__span}>
                       Please confirm you are not a robot!
                     </span>
