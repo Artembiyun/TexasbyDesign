@@ -58,7 +58,7 @@ class Form extends Component {
     console.log(this.state);
   }
 
-  callbacktest = (data) => {
+  captchaCallback = (data) => {
     console.log('look we got it ma!' + data);
     this.setState({captcha:data})
   }
@@ -440,7 +440,7 @@ class Form extends Component {
               </div>
             </li>
           </ol>
-          <ReCaptcha callbacktest={this.reCaptchaConfirm} />
+          <ReCaptcha callbacktest={this.captchaCallback} />
           <input
             className={styles.submit}
             id="submitButton"
