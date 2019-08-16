@@ -20,7 +20,8 @@ class Form extends Component {
         phoneNumber: "",
         email: "",
         TTinfo: false,
-        CitylineOffers: false
+        CitylineOffers: false,
+        captcha: ""
     };
   }
 
@@ -55,26 +56,24 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
-    console.log(this.state);
   }
 
   captchaCallback = (data) => {
-    console.log('look we got it ma!' + data);
     this.setState({captcha:data})
   }
 
   submit(e) {
     e.preventDefault();
-    console.log(
-      "Thank you " +
-        this.state.firstName +
-        " for entering the Texas by Design Contest!"
-    );
+    if (captcha){
     const formSubmitted = true;
-    
+    //Server Post Request goes here
     this.setState({
         formSubmitted
       });
+    }
+    else{
+      alert('Please confirm you are not a robot')
+    }
   }
 
   validateForm() {
